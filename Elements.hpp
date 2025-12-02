@@ -1,10 +1,10 @@
 #pragma once
+
 #include <iostream>
 
 #include <vector>
 #include <array>
 
-#include <algorithm>
 #include <complex>
 
 class Element{
@@ -106,11 +106,15 @@ public:
     Inductance(double l, int pnode, int nnode) : Element(l, pnode, nnode, this->l_counter++, 'L'){}
 
     std::complex<double> getAdmitance(double freqency) const override {
+        if(freqency < 1e-12){
+            std::string exc = "frequency cannot be zero!"; // dzielenie przez ZERO!!!
+            throw exc;
+        }
         return std::complex<double>(0.0, (-1) / ((2 * M_PI * freqency) * (this->m_value))); // dodac obsluge wyjatkow (mozna podzielic przez 0)
     }
 };
 
-class IndependantV : public Element{ // pomyslec czy nie mozna zrobic tutaj osobnej klasy bo troche lipa ze dziedziczy po Element
+class IndependantV : public Element{
 
 public: 
 
@@ -196,4 +200,4 @@ public:
 //         }
 //         return sum;
 //     }
-// };
+};
