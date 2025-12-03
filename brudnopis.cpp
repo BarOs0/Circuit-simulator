@@ -1,67 +1,35 @@
-#include <iostream>
-#include <string>
-#include <vector>
-
-class Clas{
-
-private:
-
-char id;
-
-public:
-
-Clas(char type) : id(type){}
-
-char get_id() const {
-    return this->id;
-}
-
-};
+#include "Elements.hpp"
 
 int main(){
-    Clas c1('R');
-    Clas c2('L');
-    Clas c3('C');
-    Clas c4('R');
-    std::vector<Clas> vec{c1,c2,c3,c4};
 
-    std::vector<Clas> r{0};
-    std::vector<Clas> c{0};
-    std::vector<Clas> l{0};
+    IndependantV V1(10, 1, 0);
+    Resistance R1(10, 1, 2);
+    Capacitance C1(60e-9, 2, 0);
+    Resistance R2(10, 2, 3);
+    Capacitance C2(120e-9, 3, 0);
+    Resistance R3(10, 3, 0);
+    IndependantJ J1(5,1,2);
 
-     for(auto i : vec){
+    std::vector<Element*> elements{&V1, &R1, &C1, &R2, &C2, &R3, &J1};
 
-        switch(i.get_id()){
+    Circuit c1(elements, 1e-3);
 
-            case 'R':
-                r.push_back(i);
-                break;
+    std::cout << R2.isNeighbour(C2, 3) << std::endl;
+    std::cout << R2.isNeighbour(C2) << std::endl;
 
-            case 'L':
-                l.push_back(i);
-                break;
+    std::cout << V1.isNeighbour(R3) << std::endl;
 
-            case 'C':
-                c.push_back(i);
-                break;
-        }
-    }
+    std::cout << V1.whoAmI() << V1.getId() << std::endl;
+    std::cout << R1.whoAmI() << R1.getId() << std::endl;
+    std::cout << R2.whoAmI() << R2.getId() << std::endl;
+    std::cout << R3.whoAmI() << R3.getId() << std::endl;
+    std::cout << C2.whoAmI() << C2.getId() << std::endl;
 
-    std::cout << "res" << std::endl;
+    std::cout << J1.isNeighbour(R3) << std::endl;
+    std::cout << J1.isNeighbour(R2,2) << std::endl;
+    std::cout << J1.whoAmI() << J1.getId() << std::endl;
 
-    for(int i = 0; i < r.size(); i++){
-        std::cout << r[i].get_id() << " " << std::endl;
-    }
+    Element* e = new IndependantJ(1,1,0);
+    delete e;
 
-    std::cout << "ind" << std::endl;
-
-    for(int i = 0; i < l.size(); i++){
-        std::cout << l[i].get_id() << " " << std::endl;
-    }
-
-    std::cout << "cap" << std::endl;
-
-    for(int i = 0; i < c.size(); i++){
-        std::cout << c[i].get_id() << " " << std::endl;
-    }
 }

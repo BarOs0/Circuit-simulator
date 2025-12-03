@@ -1,0 +1,12 @@
+#pragma once
+
+#include "Passive.hpp"
+
+class Inductance : public Passive{
+
+    public:
+
+        Inductance(double l, unsigned int pnode, unsigned int nnode);
+
+        std::complex<double> getAdmitance(double frequency) const override;
+}; 
