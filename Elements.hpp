@@ -55,18 +55,28 @@ protected:
     double m_value;
     std::array<int, 2> m_endpoints;
 
-    Element(double val, int pnode, int nnode, unsigned int id, char element) : m_value(val), m_endpoints({pnode, nnode}), m_id(id), m_type(element){}
+    Element(double val, int pnode, int nnode, unsigned int id, char type) : m_id(id), m_type(type){
+        if(val <= 0){
+            std::string exc = "Value must be positive double!";
+            throw exc;
+        }
+
+        if(pnode < 0 || nnode < 0){
+            std::string exc = "Both + and - nodes must be positive integers or 0";
+            throw exc;
+        }
+        this->m_value = val;
+        this->m_endpoints = {pnode, nnode};
+    }
 
     double getValue(void) const {return this->m_value;}
 
-    // === TRZEBA TUTAJ UWAZAC BO VAL NIE MOZE BYC 0 - KONIECZNIE - MAM MOZLIWOSC PODZIELIC PRZEZ ZERO, NAJLEPIEJ NAUCZYC SIE WYJATKOW I POTEM JE ZASZYC W OBLICZANIU ADMITANCJI
     void setValue(double val){
-        if(val > 0){
-            this->m_value = val;
+        if(val <= 0){
+            std::string exc = "Value must be positive double!";
+            throw exc;
         }
-        else {
-            std::cout << "Value must be positve double" << std::endl;
-        }
+        this->m_value = val;
     }
 
     virtual ~Element() = default;
@@ -106,11 +116,7 @@ public:
     Inductance(double l, int pnode, int nnode) : Element(l, pnode, nnode, this->l_counter++, 'L'){}
 
     std::complex<double> getAdmitance(double freqency) const override {
-        if(freqency < 1e-12){
-            std::string exc = "frequency cannot be zero!"; // dzielenie przez ZERO!!!
-            throw exc;
-        }
-        return std::complex<double>(0.0, (-1) / ((2 * M_PI * freqency) * (this->m_value))); // dodac obsluge wyjatkow (mozna podzielic przez 0)
+        return std::complex<double>(0.0, (-1) / ((2 * M_PI * freqency) * (this->m_value)));
     }
 };
 
@@ -181,6 +187,14 @@ private:
 public:
 
     Circuit(const std::vector<Element*> &elements, double freq) : m_components(elements), m_frequency(freq){
+
+        if(freq < 1e-12){
+            std::string exc = "Frequency cannot be zero or negative!"; // dzielenie przez ZERO w funkcjach admitancji (L)!!!
+            throw exc;
+        }
+
+        this->m_frequency = freq;
+
         buildCircuit(elements);
     }
 
