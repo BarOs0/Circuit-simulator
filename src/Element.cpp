@@ -31,10 +31,7 @@ char Element::whoAmI() const {return m_type;}
 
 unsigned int Element::getId() const {return m_id;}
 
-void Element::getEndpoints(unsigned int &pnode, unsigned int &nnode) const {
-    pnode = m_endpoints[0];
-    nnode = m_endpoints[1];
-}
+std::array<unsigned int, 2> Element::getEndpoints() const {return m_endpoints;}
 
 void Element::setEndpoints(unsigned int pnode, unsigned int nnode){
     m_endpoints = validateEndpoints({pnode, nnode});

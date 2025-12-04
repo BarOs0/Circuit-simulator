@@ -20,20 +20,17 @@ unsigned int Circuit::getTotalJsources() const {return m_total_jsources;}
 
 void Circuit::buildCircuit(const std::vector<Element*> &elements){
     
-        unsigned int pnode_max = 0;
-        unsigned int nnode_max = 0;
-        unsigned int pnode = 0;
-        unsigned int nnode = 0;
+       std::array<unsigned int, 2> nodes_max = {0, 0};
 
         for(auto e : elements){
 
             //looking for total number of nodes
-            e->getEndpoints(pnode, nnode);
-            if(pnode > pnode_max){
-                pnode_max = pnode;
+            std::array<unsigned int, 2> nodes = e->getEndpoints();
+            if(nodes[0] > nodes_max[0]){
+                nodes_max[0] = nodes[0];
             }
-            else if(nnode > nnode_max){
-                nnode_max = nnode;
+            else if(nodes[1] > nodes_max[1]){
+                nodes_max[1] = nodes[1];
             }
 
             //parsing
@@ -61,7 +58,7 @@ void Circuit::buildCircuit(const std::vector<Element*> &elements){
             }
         }
 
-        this->m_total_nodes = std::max(pnode_max, nnode_max); // total number of nodes
+        this->m_total_nodes = std::max(nodes_max[0], nodes_max[1]); // total number of nodes
 }
 
 double Circuit::validateFrequency(double frequency){

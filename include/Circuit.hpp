@@ -34,5 +34,15 @@ class Circuit{
 
         void buildCircuit(const std::vector<Element*> &elements);
 
+        // void generate_A();
+
+        // void generate_G();
+
+        // void generate_B();
+
+        // void generate_C();
+
+        // void generate_D();
+
         static double validateFrequency(double frequency);
 };

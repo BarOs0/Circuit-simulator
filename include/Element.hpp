@@ -24,7 +24,7 @@ class Element {
 
         unsigned int getId() const;
 
-        void getEndpoints(unsigned int &pnode, unsigned int &nnode) const;
+        std::array<unsigned int, 2> getEndpoints() const;
 
         void setEndpoints(unsigned int pnode, unsigned int nnode);
 
