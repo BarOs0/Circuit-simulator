@@ -51,8 +51,6 @@ protected:
                 std::cout << "Invalid element type!" << std::endl;
                 break;
         }
-
-
     }
 
     public:
