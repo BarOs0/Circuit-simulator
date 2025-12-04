@@ -4,11 +4,19 @@ Circuit::Circuit(const std::vector<Element*> &elements, double frequency)
                 : m_components(elements), m_frequency(validateFrequency(frequency)){
 
     buildCircuit(elements);
+    m_total_vsources = m_vsources.size();
+    m_total_jsources = m_jsources.size();
 }
 
 double Circuit::getFrequnecy() const {return m_frequency;}
 
 void Circuit::setFrequency(double frequency){m_frequency = validateFrequency(frequency);}
+
+unsigned int Circuit::getTotalNodes() const {return m_total_nodes;}
+
+unsigned int Circuit::getTotalVsources() const {return m_total_vsources;}
+
+unsigned int Circuit::getTotalJsources() const {return m_total_jsources;}
 
 void Circuit::buildCircuit(const std::vector<Element*> &elements){
     
@@ -41,11 +49,9 @@ void Circuit::buildCircuit(const std::vector<Element*> &elements){
                 m_inductors.push_back(e);
                 break;
             case 'V':
-                this->m_total_vsources++; //total number of independant voltage sources
                 m_vsources.push_back(e);
                 break;
             case 'J':
-                this->m_total_jsources++;
                 m_jsources.push_back(e);
                 break;
             default:

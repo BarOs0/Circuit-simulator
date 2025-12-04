@@ -14,6 +14,12 @@ class Circuit{
 
         void setFrequency(double frequency);
 
+        unsigned int getTotalNodes() const;
+
+        unsigned int getTotalVsources() const;
+
+        unsigned int getTotalJsources() const;
+
     private:
 
         std::vector<Element*> m_resistors, m_capacitors, m_inductors, m_vsources, m_components, m_jsources;

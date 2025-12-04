@@ -37,4 +37,8 @@ int main(){
 
     Element* e = new IndependantJ(1,1,0);
     delete e;
+
+    std::cout << c1.getTotalNodes() << std::endl;
+    std::cout << c1.getTotalVsources() << std::endl;
+    std::cout << c1.getTotalJsources() << std::endl;
 }
