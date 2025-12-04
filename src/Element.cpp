@@ -44,7 +44,7 @@ double Element::getValue() const {return m_value;}
 
 void Element::setValue(double val){m_value = validateVal(val);}
 
-bool Element::isNeighbour(const Element& other, int node) const {
+bool Element::isNeighbour(const Element& other, unsigned int node) const {
     if(node != 0){
         return (this->m_endpoints[0] == node || this->m_endpoints[1] == node) && 
                (other.m_endpoints[0] == node || other.m_endpoints[1] == node);

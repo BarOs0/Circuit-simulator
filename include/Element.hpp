@@ -32,7 +32,7 @@ class Element {
 
         void setValue(double val);
 
-        bool isNeighbour(const Element& other, int node) const;
+        bool isNeighbour(const Element& other, unsigned int node) const;
 
         bool isNeighbour(const Element& other) const;
 
