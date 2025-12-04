@@ -2,9 +2,9 @@
 
 #include "Active.hpp"
 
-class IndependtantJ : public Active{
+class IndependantJ : public Active{
 
     public:
 
-        IndependtantJ(double j, unsigned int pnode, unsigned int nnode);
+        IndependantJ(double j, unsigned int pnode, unsigned int nnode);
 };
