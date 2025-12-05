@@ -179,4 +179,11 @@ CMakeFiles/circuit_simulator.dir/src/Circuit.cpp.o: \
  /usr/include/c++/13/bits/stl_uninitialized.h \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
- /usr/include/c++/13/bits/vector.tcc
+ /usr/include/c++/13/bits/vector.tcc \
+ /home/bartek/JPO2025/projekt/include/Passive.hpp \
+ /home/bartek/JPO2025/projekt/include/Active.hpp \
+ /home/bartek/JPO2025/projekt/include/Resistance.hpp \
+ /home/bartek/JPO2025/projekt/include/Capacitance.hpp \
+ /home/bartek/JPO2025/projekt/include/Inductance.hpp \
+ /home/bartek/JPO2025/projekt/include/IndependantV.hpp \
+ /home/bartek/JPO2025/projekt/include/IndependantJ.hpp

@@ -1,6 +1,13 @@
 #pragma once
 
 #include "Element.hpp"
+#include "Passive.hpp"
+#include "Active.hpp"
+#include "Resistance.hpp"
+#include "Capacitance.hpp"
+#include "Inductance.hpp"
+#include "IndependantV.hpp"
+#include "IndependantJ.hpp"
 
 #define F_LIM 1e-12
 
@@ -10,7 +17,7 @@ class Circuit{
 
         Circuit(const std::vector<Element*> &elements, double frequnecy);
 
-        double getFrequnecy() const;
+        double getFrequency() const;
 
         void setFrequency(double frequency);
 
@@ -22,9 +29,20 @@ class Circuit{
 
     private:
 
-        std::vector<Element*> m_resistors, m_capacitors, m_inductors, m_vsources, m_components, m_jsources;
+        std::vector<Resistance*> m_resistors;
+        std::vector<Capacitance*> m_capacitors;
+        std::vector<Inductance*> m_inductors;
 
-        std::vector<std::vector<std::complex<double>>> m_A, m_G, m_B, m_C, m_D;
+        std::vector<IndependantV*> m_vsources;
+        std::vector<IndependantJ*> m_jsources;
+
+        std::vector<Passive*> m_passives;
+        std::vector<Active*> m_actives;
+
+        std::vector<std::vector<std::complex<double>>> m_A, m_Y, m_B, m_C, m_D;
+        // std::vector<std::complex<double>> v;
+        // std::vector<std::complex<double>> j;
+        // std::vector<std::complex<double>> x;
 
         unsigned int m_total_nodes{0}; // n
 
@@ -34,15 +52,17 @@ class Circuit{
 
         void buildCircuit(const std::vector<Element*> &elements);
 
-        // void generate_A();
+        void generate_A();
 
-        // void generate_G();
+        void generate_Y();
 
-        // void generate_B();
+        void generate_B();
 
-        // void generate_C();
+        void generate_C();
 
-        // void generate_D();
+        void generate_D();
+
+        // void generate_x();
 
         static double validateFrequency(double frequency);
 };
