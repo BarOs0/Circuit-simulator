@@ -6,5 +6,5 @@ class IndependantV : public Active{
 
     public:
 
-        IndependantV(double v, unsigned int pnode, unsigned int nnode);
+        IndependantV(std::complex<double> v, unsigned int pnode, unsigned int nnode);
 };

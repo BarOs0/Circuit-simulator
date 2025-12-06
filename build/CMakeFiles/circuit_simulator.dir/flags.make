@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/bartek/JPO2025/projekt/include
+CXX_INCLUDES = -I/home/bartek/JPO2025/projekt/include -isystem /usr/include/eigen3
 
 CXX_FLAGS = -std=gnu++17 -Wall -Wextra -Wpedantic
 

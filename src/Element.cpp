@@ -2,7 +2,7 @@
 
 Element::Element(double val, unsigned int pnode, unsigned int nnode, char type) 
                 : m_type(type), 
-                m_value(validateVal(val)),
+                m_value(validateVal(val, type)),
                 m_endpoints{validateEndpoints({pnode, nnode})}{
 
     switch(type){
@@ -39,7 +39,7 @@ void Element::setEndpoints(unsigned int pnode, unsigned int nnode){
 
 double Element::getValue() const {return m_value;}
 
-void Element::setValue(double val){m_value = validateVal(val);}
+void Element::setValue(double val){m_value = validateVal(val, m_type);}
 
 bool Element::isNeighbour(const Element& other, unsigned int node) const {
     if(node != 0){
@@ -58,10 +58,13 @@ bool Element::isNeighbour(const Element& other) const { // method overload
            (this->m_endpoints[1] == other.m_endpoints[0] && this->m_endpoints[1] != 0);
 }
 
-double Element::validateVal(double val){
-    if(val < E_LIM){
-        throw std::invalid_argument("Value must be positive double! Invalid value: "
-                    + std::to_string(val));
+double Element::validateVal(double val, char type){
+    if(type == 'R' || type == 'C' || type == 'L'){
+        if(val < E_LIM){
+            throw std::invalid_argument("Value must be positive double! Invalid value: "
+                                        + std::to_string(val));
+        }
+        return val;
     }
     return val;
 }

@@ -6,5 +6,5 @@ class IndependantJ : public Active{
 
     public:
 
-        IndependantJ(double j, unsigned int pnode, unsigned int nnode);
+        IndependantJ(std::complex<double> j, unsigned int pnode, unsigned int nnode);
 };

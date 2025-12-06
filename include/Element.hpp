@@ -52,7 +52,7 @@ class Element {
 
         unsigned int m_id;
 
-        static double validateVal(double val);
+        static double validateVal(double val, char type);
 
         static std::array<unsigned int, 2> validateEndpoints(const std::array<unsigned int, 2> &endpoints);
 };

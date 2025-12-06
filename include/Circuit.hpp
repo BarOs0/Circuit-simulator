@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Eigen/Dense>
+
 #include "Element.hpp"
 #include "Passive.hpp"
 #include "Active.hpp"
@@ -15,7 +17,7 @@ class Circuit{
 
     public:
 
-        Circuit(const std::vector<Element*> &elements, double frequnecy);
+        Circuit(const std::vector<Element*> &elements, double frequency);
 
         double getFrequency() const;
 
@@ -26,6 +28,10 @@ class Circuit{
         unsigned int getTotalVsources() const;
 
         unsigned int getTotalJsources() const;
+
+        std::vector<std::complex<double>> getPotentials() const;
+
+        std::vector<std::complex<double>> getCurrents() const;
 
     private:
 
@@ -39,11 +45,14 @@ class Circuit{
         std::vector<Passive*> m_passives;
         std::vector<Active*> m_actives;
 
-        std::vector<std::vector<std::complex<double>>> m_A, m_Y, m_B, m_C, m_D;
-        // std::vector<std::complex<double>> v;
-        // std::vector<std::complex<double>> j;
-        // std::vector<std::complex<double>> x;
+        std::vector<std::vector<std::complex<double>>> m_Y, m_B, m_C, m_D;
 
+        Eigen::MatrixXcd m_A;
+        Eigen::VectorXcd m_z;
+
+        std::vector<std::complex<double>> m_v;
+        std::vector<std::complex<double>> m_j;
+        
         unsigned int m_total_nodes{0}; // n
 
         unsigned int m_total_vsources{0}, m_total_jsources{0}; // m
@@ -62,7 +71,9 @@ class Circuit{
 
         void generate_D();
 
-        // void generate_x();
+        void generate_z();
+
+        void solve();
 
         static double validateFrequency(double frequency);
 };

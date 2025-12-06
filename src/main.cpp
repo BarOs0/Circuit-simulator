@@ -8,13 +8,13 @@
 #include "Circuit.hpp"
 
 int main(){
-    IndependantV V1(10, 1, 0);
+    IndependantV V1(std::complex<double>(10.0, 1), 1, 0);
     Resistance R1(10, 1, 2);
     Capacitance C1(60e-9, 2, 0);
     Resistance R2(10, 2, 3);
     Capacitance C2(120e-9, 3, 0);
     Resistance R3(10, 3, 0);
-    IndependantJ J1(5,1,2);
+    IndependantJ J1(std::complex<double>(1.0, 0),1,2);
 
     std::vector<Element*> elements{&V1, &R1, &C1, &R2, &C2, &R3, &J1};
 

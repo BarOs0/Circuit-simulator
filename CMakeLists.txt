@@ -15,6 +15,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # This allows us to use #include "Element.hpp" instead of #include "../include/Element.hpp"
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
+# Solving Matrix equations with Eigen
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+
 #Creating variable SOURCES
 #Everything in SOURCES will be compiled
 set(SOURCES
@@ -33,6 +36,9 @@ set(SOURCES
 #Creating executable file "circuit_simulator"
 #Output location depends on where cmake is run (typically /build)
 add_executable(circuit_simulator ${SOURCES})
+
+# include <Eigen/Dense>
+target_link_libraries(circuit_simulator Eigen3::Eigen)
 
 #Compiler warnings
 #MSVC (Windows, Visual Studio)
