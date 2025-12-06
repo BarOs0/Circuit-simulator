@@ -8,37 +8,29 @@
 #include "Circuit.hpp"
 
 int main(){
-    IndependantV V1(std::complex<double>(10.0, 1), 1, 0);
-    Resistance R1(10, 1, 2);
-    Capacitance C1(60e-9, 2, 0);
-    Resistance R2(10, 2, 3);
-    Capacitance C2(120e-9, 3, 0);
-    Resistance R3(10, 3, 0);
-    IndependantJ J1(std::complex<double>(1.0, 0),1,2);
+   
+    IndependantV V1(std::complex<double>(sqrt(2), 0), 1, 0);
+    Resistance R1(1, 1, 2);
+    Capacitance C1(25, 2, 0);
+    Inductance L1(1, 2, 3);
+    Resistance R2(1, 3, 0);
 
-    std::vector<Element*> elements{&V1, &R1, &C1, &R2, &C2, &R3, &J1};
+    std::vector<Element*> elements{&V1, &R1, &C1, &L1, &R2};
 
-    Circuit c1(elements, 1e-3);
+    Circuit c1(elements, 0.2);
 
-    std::cout << R2.isNeighbour(C2, 3) << std::endl;
-    std::cout << R2.isNeighbour(C2) << std::endl;
+    std::vector<std::complex<double>> v = c1.getPotentials();
+    std::vector<std::complex<double>> c = c1.getCurrents();
 
-    std::cout << V1.isNeighbour(R3) << std::endl;
+    std::cout << "POTENTIALS: " << std::endl;
 
-    std::cout << V1.whoAmI() << V1.getId() << std::endl;
-    std::cout << R1.whoAmI() << R1.getId() << std::endl;
-    std::cout << R2.whoAmI() << R2.getId() << std::endl;
-    std::cout << R3.whoAmI() << R3.getId() << std::endl;
-    std::cout << C2.whoAmI() << C2.getId() << std::endl;
+    for(unsigned int i = 0; i < v.size(); i++){
+        std::cout << (i + 1) << ". " << std::to_string(v[i].real()) << std::to_string(v[i].imag()) << std::endl;
+    }
 
-    std::cout << J1.isNeighbour(R3) << std::endl;
-    std::cout << J1.isNeighbour(R2,2) << std::endl;
-    std::cout << J1.whoAmI() << J1.getId() << std::endl;
+    std::cout << "CURRENTS: " << std::endl;
 
-    Element* e = new IndependantJ(1,1,0);
-    delete e;
-
-    std::cout << c1.getTotalNodes() << std::endl;
-    std::cout << c1.getTotalVsources() << std::endl;
-    std::cout << c1.getTotalJsources() << std::endl;
+    for(unsigned int i = 0; i < v.size(); i++){
+        std::cout << (i + 1) << ". " << std::to_string(c[i].real()) << std::to_string(c[i].imag()) << std::endl;
+    }
 }
