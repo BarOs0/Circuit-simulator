@@ -9,28 +9,19 @@
 
 int main(){
    
-    IndependantV V1(std::complex<double>(sqrt(2), 0), 1, 0);
-    Resistance R1(1, 1, 2);
-    Capacitance C1(25, 2, 0);
-    Inductance L1(1, 2, 3);
-    Resistance R2(1, 3, 0);
+    IndependantV Us(std::complex<double>(0.5, 0), 1, 0 );
+    Resistance Rs(50, 1,2);
+    Capacitance C22(100e-9, 2, 3);
+    Capacitance C21(47e-9, 3, 4);
+    Resistance R21(1000, 4, 0);
+    Resistance R22(1000, 4, 5);
+    Inductance L21(10e-3, 3, 5);
+    Capacitance C23(100e-9, 5, 0);
 
-    std::vector<Element*> elements{&V1, &R1, &C1, &L1, &R2};
+    std::vector<Element*> elements{&Us, &Rs, &C22, &C21, &R21, &R22, &L21, &C23};
 
-    Circuit c1(elements, 0.2);
+    Circuit c1(elements, 1000);
 
-    std::vector<std::complex<double>> v = c1.getPotentials();
-    std::vector<std::complex<double>> c = c1.getCurrents();
-
-    std::cout << "POTENTIALS: " << std::endl;
-
-    for(unsigned int i = 0; i < v.size(); i++){
-        std::cout << (i + 1) << ". " << std::to_string(v[i].real()) << std::to_string(v[i].imag()) << std::endl;
-    }
-
-    std::cout << "CURRENTS: " << std::endl;
-
-    for(unsigned int i = 0; i < v.size(); i++){
-        std::cout << (i + 1) << ". " << std::to_string(c[i].real()) << std::to_string(c[i].imag()) << std::endl;
-    }
+    c1.displayPotentials();
+    c1.displayCurrents();
 }

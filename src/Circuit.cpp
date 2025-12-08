@@ -32,6 +32,22 @@ std::vector<std::complex<double>> Circuit::getPotentials() const {return m_v;}
 
 std::vector<std::complex<double>> Circuit::getCurrents() const {return m_j;}
 
+void Circuit::displayPotentials() const {
+    std::cout << "POTENTIALS: " << std::endl;
+    for(unsigned int i = 0; i < m_v.size(); i++){
+        std::cout << "Node " << (i + 1) << " Potential: " << 
+        std::to_string(m_v[i].real()) << ((m_v[i].imag()) > 0 ? "+" : "") << m_v[i].imag() << std::endl;
+    }
+}
+
+void Circuit::displayCurrents() const {
+    std::cout << "CURRENTS: " << std::endl;
+    for(unsigned int i = 0; i < m_j.size(); i++){
+        std::cout << "V" << (i + 1) << " Current: " << 
+        std::to_string(m_j[i].real()) << ((m_j[i].imag()) > 0 ? "+" : "") << m_j[i].imag() << std::endl;
+    }
+}
+
 void Circuit::buildCircuit(const std::vector<Element*> &elements){
     
        std::array<unsigned int, 2> nodes_max = {0, 0};

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <Eigen/Dense>
 
 #include "Element.hpp"
@@ -32,6 +33,10 @@ class Circuit{
         std::vector<std::complex<double>> getPotentials() const;
 
         std::vector<std::complex<double>> getCurrents() const;
+
+        void displayPotentials() const;
+
+        void displayCurrents() const;
 
     private:
 

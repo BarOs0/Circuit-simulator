@@ -10,16 +10,6 @@
 class Element {
     public:
 
-        inline static unsigned int r_counter = 1;
-
-        inline static unsigned int c_counter = 1;
-
-        inline static unsigned int l_counter = 1;
-
-        inline static unsigned int v_counter = 1;
-        
-        inline static unsigned int j_counter = 1;
-
         char whoAmI() const;
 
         unsigned int getId() const;
@@ -38,17 +28,29 @@ class Element {
 
         virtual ~Element() = default;
 
-    protected:
+    private: // here because type should be initialized before m_value (validateVal in Element.cpp)
 
         char m_type;
 
-        double m_value;
+    protected:
 
-        std::array<unsigned int, 2> m_endpoints;
+        double m_value;
 
         Element(double val, unsigned int pnode, unsigned int nnode, char type);
 
     private:
+
+        inline static unsigned int r_counter = 1;
+
+        inline static unsigned int c_counter = 1;
+
+        inline static unsigned int l_counter = 1;
+
+        inline static unsigned int v_counter = 1;
+        
+        inline static unsigned int j_counter = 1;
+
+        std::array<unsigned int, 2> m_endpoints;
 
         unsigned int m_id;
 
