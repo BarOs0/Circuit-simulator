@@ -50,9 +50,10 @@ class Circuit{
         std::vector<Passive*> m_passives;
         std::vector<Active*> m_actives;
 
-        std::vector<std::vector<std::complex<double>>> m_Y, m_B, m_C, m_D;
+        std::vector<std::vector<std::complex<double>>> m_B, m_C, m_D;
 
         Eigen::MatrixXcd m_A;
+        Eigen::MatrixXcd m_Y;
         Eigen::VectorXcd m_z;
 
         std::vector<std::complex<double>> m_v;

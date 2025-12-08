@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "Resistance.hpp"
 #include "Capacitance.hpp"
 #include "Inductance.hpp"

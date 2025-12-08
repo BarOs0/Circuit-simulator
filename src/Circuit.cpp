@@ -1,5 +1,7 @@
 #include "Circuit.hpp"
 
+#define Y_DET_LIM 1e-14 // for floating node detection
+
 Circuit::Circuit(const std::vector<Element*> &elements, double frequency)
                 : m_frequency(validateFrequency(frequency)){
 
@@ -33,19 +35,22 @@ std::vector<std::complex<double>> Circuit::getPotentials() const {return m_v;}
 std::vector<std::complex<double>> Circuit::getCurrents() const {return m_j;}
 
 void Circuit::displayPotentials() const {
-    std::cout << "POTENTIALS: " << std::endl;
+    std::cout << "============ POTENTIALS[V] ============" << std::endl;
     for(unsigned int i = 0; i < m_v.size(); i++){
         std::cout << "Node " << (i + 1) << " Potential: " << 
-        std::to_string(m_v[i].real()) << ((m_v[i].imag()) > 0 ? "+" : "") << m_v[i].imag() << std::endl;
+        std::to_string(m_v[i].real()) << ((m_v[i].imag()) > 0 ? "+" : "") << m_v[i].imag() << "i" << std::endl;
     }
+    std::cout << "=====================================" << std::endl;
 }
 
 void Circuit::displayCurrents() const {
-    std::cout << "CURRENTS: " << std::endl;
+    std::cout << std::endl;
+    std::cout << "============ CURRENTS[A] ============" << std::endl;
     for(unsigned int i = 0; i < m_j.size(); i++){
         std::cout << "V" << (i + 1) << " Current: " << 
-        std::to_string(m_j[i].real()) << ((m_j[i].imag()) > 0 ? "+" : "") << m_j[i].imag() << std::endl;
+        std::to_string(m_j[i].real()) << ((m_j[i].imag()) > 0 ? "+" : "") << m_j[i].imag() << "i" << std::endl;
     }
+    std::cout << "=====================================" << std::endl;
 }
 
 void Circuit::buildCircuit(const std::vector<Element*> &elements){
@@ -102,7 +107,7 @@ void Circuit::generate_A(){
 
     for(unsigned int i = 0; i < m_total_nodes; i++){
         for(unsigned int j = 0; j < m_total_nodes; j++){
-            m_A(i, j) = m_Y[i][j];
+            m_A(i, j) = m_Y(i, j);
         }
     }
 
@@ -127,8 +132,8 @@ void Circuit::generate_A(){
 
 void Circuit::generate_Y(){
 
-    m_Y.resize(m_total_nodes, std::vector<std::complex<double>>(m_total_nodes,
-                std::complex<double>(0.0, 0.0)));
+    m_Y.resize(m_total_nodes, m_total_nodes);
+    m_Y.setZero();
 
     std::complex<double> y(0.0,0.0);
 
@@ -140,18 +145,22 @@ void Circuit::generate_Y(){
         unsigned int nnode = p->getEndpoints()[1];
 
         if(pnode != 0){
-            m_Y[pnode - 1][pnode - 1] += y;
+            m_Y(pnode - 1, pnode - 1) += y;
             if(nnode != 0){
-                m_Y[pnode - 1][nnode - 1] -= y;
+                m_Y(pnode - 1, nnode - 1) -= y;
             }
         }
 
         if(nnode != 0){
-            m_Y[nnode - 1][nnode - 1] += y;
+            m_Y(nnode - 1, nnode - 1) += y;
             if(pnode != 0){
-                m_Y[nnode - 1][pnode - 1] -= y;
+                m_Y(nnode - 1, pnode - 1) -= y;
             }
         }
+    }
+
+    if(std::abs(m_Y.determinant()) < Y_DET_LIM){
+        throw std::invalid_argument("Your topology has floating nodes! Please check the wires.");
     }
 }
 
