@@ -2,17 +2,21 @@
 
 #include "Element.hpp"
 
-class Active : public Element{
+namespace bo{
 
-    public:
+    class Active : public Element{
 
-        std::complex<double> getSourceValue() const;
+        public:
 
-    protected:
+            std::complex<double> getSourceValue() const;
 
-        Active(std::complex<double> val, unsigned int pnode, unsigned int nnode, char type);
+        protected:
 
-    private:
+            Active(std::complex<double> val, unsigned int pnode, unsigned int nnode, char type);
 
-        std::complex<double> m_source_value;
-};
+        private:
+
+            std::complex<double> m_source_value;
+    };
+    
+}

@@ -2,15 +2,19 @@
 
 #include "Element.hpp"
 
-class Passive : public Element{
+namespace bo{
 
-    public: 
+    class Passive : public Element{
 
-        virtual std::complex<double> getAdmitance(double frequency) const = 0;
+        public: 
 
-        virtual ~Passive() = default;
+            virtual std::complex<double> getAdmitance(double frequency) const = 0;
 
-    protected:
+            virtual ~Passive() = default;
 
-        Passive(double val, unsigned int pnode, unsigned int nnode, char type);
-};
+        protected:
+
+            Passive(double val, unsigned int pnode, unsigned int nnode, char type);
+    };
+    
+}

@@ -5,56 +5,60 @@
 #include <vector>
 #include <stdexcept>
 
-#define E_LIM 1e-14
+namespace bo{
 
-class Element {
-    public:
+    constexpr double E_LIM = 1e-14;
 
-        char whoAmI() const;
+    class Element {
+        public:
 
-        unsigned int getId() const;
+            char whoAmI() const;
 
-        std::array<unsigned int, 2> getEndpoints() const;
+            unsigned int getId() const;
 
-        void setEndpoints(unsigned int pnode, unsigned int nnode);
+            std::array<unsigned int, 2> getEndpoints() const;
 
-        double getValue() const;
+            void setEndpoints(unsigned int pnode, unsigned int nnode);
 
-        void setValue(double val);
+            double getValue() const;
 
-        bool isNeighbour(const Element& other, unsigned int node) const;
+            void setValue(double val);
 
-        bool isNeighbour(const Element& other) const;
+            bool isNeighbour(const Element& other, unsigned int node) const;
 
-        virtual ~Element() = default;
+            bool isNeighbour(const Element& other) const;
 
-    private: // here because type should be initialized before m_value (validateVal in Element.cpp)
+            virtual ~Element() = default;
 
-        char m_type;
+        private: // here because type should be initialized before m_value (validateVal in Element.cpp)
 
-    protected:
+            char m_type;
 
-        double m_value;
+        protected:
 
-        Element(double val, unsigned int pnode, unsigned int nnode, char type);
+            double m_value;
 
-    private:
+            Element(double val, unsigned int pnode, unsigned int nnode, char type);
 
-        inline static unsigned int r_counter = 1;
+        private:
 
-        inline static unsigned int c_counter = 1;
+            inline static unsigned int r_counter = 1;
 
-        inline static unsigned int l_counter = 1;
+            inline static unsigned int c_counter = 1;
 
-        inline static unsigned int v_counter = 1;
-        
-        inline static unsigned int j_counter = 1;
+            inline static unsigned int l_counter = 1;
 
-        std::array<unsigned int, 2> m_endpoints;
+            inline static unsigned int v_counter = 1;
+            
+            inline static unsigned int j_counter = 1;
 
-        unsigned int m_id;
+            std::array<unsigned int, 2> m_endpoints;
 
-        static double validateVal(double val, char type);
+            unsigned int m_id;
 
-        static std::array<unsigned int, 2> validateEndpoints(const std::array<unsigned int, 2> &endpoints);
-};
+            static double validateVal(double val, char type);
+
+            static std::array<unsigned int, 2> validateEndpoints(const std::array<unsigned int, 2> &endpoints);
+    };
+    
+}

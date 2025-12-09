@@ -2,9 +2,13 @@
 
 #include "Active.hpp"
 
-class IndependantJ : public Active{
+namespace bo{
 
-    public:
+    class IndependantJ : public Active{
 
-        IndependantJ(std::complex<double> j, unsigned int pnode, unsigned int nnode);
-};
+        public:
+
+            IndependantJ(std::complex<double> j, unsigned int pnode, unsigned int nnode);
+    };
+
+}

@@ -12,74 +12,79 @@
 #include "IndependantV.hpp"
 #include "IndependantJ.hpp"
 
-#define F_LIM 1e-12
+namespace bo{
 
-class Circuit{
+    constexpr double F_LIM = 1e-12;
+    constexpr double Y_DET_LIM = 1e-18;
 
-    public:
+    class Circuit{
 
-        Circuit(const std::vector<Element*> &elements, double frequency);
+        public:
 
-        double getFrequency() const;
+            Circuit(const std::vector<Element*> &elements, double frequency);
 
-        void setFrequency(double frequency);
+            double getFrequency() const;
 
-        unsigned int getTotalNodes() const;
+            void setFrequency(double frequency);
 
-        unsigned int getTotalVsources() const;
+            unsigned int getTotalNodes() const;
 
-        unsigned int getTotalJsources() const;
+            unsigned int getTotalVsources() const;
 
-        std::vector<std::complex<double>> getPotentials() const;
+            unsigned int getTotalJsources() const;
 
-        std::vector<std::complex<double>> getCurrents() const;
+            std::vector<std::complex<double>> getPotentials() const;
 
-        void displayPotentials() const;
+            std::vector<std::complex<double>> getCurrents() const;
 
-        void displayCurrents() const;
+            void displayPotentials() const;
 
-    private:
+            void displayCurrents() const;
 
-        std::vector<Resistance*> m_resistors;
-        std::vector<Capacitance*> m_capacitors;
-        std::vector<Inductance*> m_inductors;
+        private:
 
-        std::vector<IndependantV*> m_vsources;
-        std::vector<IndependantJ*> m_jsources;
+            std::vector<Resistance*> m_resistors;
+            std::vector<Capacitance*> m_capacitors;
+            std::vector<Inductance*> m_inductors;
 
-        std::vector<Passive*> m_passives;
-        std::vector<Active*> m_actives;
+            std::vector<IndependantV*> m_vsources;
+            std::vector<IndependantJ*> m_jsources;
 
-        std::vector<std::vector<std::complex<double>>> m_B, m_C, m_D;
+            std::vector<Passive*> m_passives;
+            std::vector<Active*> m_actives;
 
-        Eigen::MatrixXcd m_A;
-        Eigen::MatrixXcd m_Y;
-        Eigen::VectorXcd m_z;
+            std::vector<std::vector<std::complex<double>>> m_B, m_C, m_D;
 
-        std::vector<std::complex<double>> m_v;
-        std::vector<std::complex<double>> m_j;
-        
-        unsigned int m_total_nodes{0}; // n
+            Eigen::MatrixXcd m_A;
+            Eigen::MatrixXcd m_Y;
+            Eigen::VectorXcd m_z;
 
-        unsigned int m_total_vsources{0}, m_total_jsources{0}; // m
+            std::vector<std::complex<double>> m_v;
+            std::vector<std::complex<double>> m_j;
+            
+            unsigned int m_total_nodes{0}; // n
 
-        double m_frequency;
+            unsigned int m_total_vsources{0}, m_total_jsources{0}; // m
 
-        void buildCircuit(const std::vector<Element*> &elements);
+            double m_frequency;
 
-        void generate_A();
+            void buildCircuit(const std::vector<Element*> &elements);
 
-        void generate_Y();
+            void generate_A();
 
-        void generate_B();
+            void generate_Y();
 
-        void generate_C();
+            void generate_B();
 
-        void generate_D();
+            void generate_C();
 
-        void generate_z();
+            void generate_D();
 
-        void solve();
+            void generate_z();
 
-        static double validateFrequency(double frequency);
-};
+            void solve();
+
+            static double validateFrequency(double frequency);
+    };
+
+}

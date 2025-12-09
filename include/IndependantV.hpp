@@ -2,9 +2,13 @@
 
 #include "Active.hpp"
 
-class IndependantV : public Active{
+namespace bo{
 
-    public:
+    class IndependantV : public Active{
 
-        IndependantV(std::complex<double> v, unsigned int pnode, unsigned int nnode);
-};
+        public:
+
+            IndependantV(std::complex<double> v, unsigned int pnode, unsigned int nnode);
+    };
+
+}

@@ -2,19 +2,23 @@
 
 #include "Passive.hpp"
 
-class Capacitance : public Passive{
+namespace bo{
 
-    public:
+    class Capacitance : public Passive{
 
-        Capacitance(double c, unsigned int pnode, unsigned int nnode);
+        public:
 
-        std::complex<double> getAdmitance(double frequency) const override;
+            Capacitance(double c, unsigned int pnode, unsigned int nnode);
 
-        Capacitance operator+(const Capacitance &other) const;
+            std::complex<double> getAdmitance(double frequency) const override;
 
-        Capacitance& operator+=(const Capacitance &other);
+            Capacitance operator+(const Capacitance &other) const;
 
-        Capacitance operator||(const Capacitance &other) const;
+            Capacitance& operator+=(const Capacitance &other);
 
-        Capacitance& operator|=(const Capacitance &other);
-};
+            Capacitance operator||(const Capacitance &other) const;
+
+            Capacitance& operator|=(const Capacitance &other);
+    };
+
+}
