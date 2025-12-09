@@ -4,10 +4,21 @@
 
 namespace bo{
 
+    /**
+     * @brief Derived class for independent current sources
+     * 
+     * IndependentJ represents an independent current source component.
+     */
     class IndependantJ : public Active{
 
         public:
 
+            /**
+             * @brief Public constructor for user (main())
+             * @param j Current source value (complex) [A]
+             * @param pnode Positive node number
+             * @param nnode Negative node number
+             */
             IndependantJ(std::complex<double> j, unsigned int pnode, unsigned int nnode);
     };
 

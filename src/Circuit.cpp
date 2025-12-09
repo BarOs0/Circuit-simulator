@@ -22,8 +22,6 @@ namespace bo{
 
     double Circuit::getFrequency() const {return m_frequency;}
 
-    void Circuit::setFrequency(double frequency){m_frequency = validateFrequency(frequency);}
-
     unsigned int Circuit::getTotalNodes() const {return m_total_nodes;}
 
     unsigned int Circuit::getTotalVsources() const {return m_total_vsources;}
@@ -139,7 +137,7 @@ namespace bo{
 
         for(auto p : m_passives){
 
-            y = p->getAdmitance(m_frequency);
+            y = p->getAdmittance(m_frequency);
 
             unsigned int pnode = p->getEndpoints()[0];
             unsigned int nnode = p->getEndpoints()[1];
@@ -221,15 +219,15 @@ namespace bo{
             unsigned int nnode = j->getEndpoints()[1];
 
             if(pnode != 0){
-                m_z(pnode - 1) += j->getSourceValue();
+                m_z(pnode - 1) += j->getActiveValue();
             }
             if(nnode != 0){
-                m_z(nnode - 1) -= j->getSourceValue();
+                m_z(nnode - 1) -= j->getActiveValue();
             }
         }
 
         for(auto v : m_vsources){
-            m_z(m_total_nodes + v->getId() - 1) = v->getSourceValue();
+            m_z(m_total_nodes + v->getId() - 1) = v->getActiveValue();
         }
     }
 

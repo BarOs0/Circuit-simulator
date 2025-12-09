@@ -3,8 +3,11 @@
 namespace bo{
 
     Active::Active(std::complex<double> val, unsigned int pnode, unsigned int nnode, char type)
-                : Element(-1.0, pnode, nnode, type), m_source_value(val){} //-1 bcs vsoruce and jsource should be complex<double>
+                : Element(pnode, nnode, type), m_active_value(val){}
 
-    std::complex<double> Active::getSourceValue() const {return m_source_value;}
+    std::complex<double> Active::getActiveValue() const {return m_active_value;}
 
+    void Active::setActiveValue(const std::complex<double> &val){
+        m_active_value = val;
+    }
 }
