@@ -7,7 +7,7 @@ namespace bo{
     /**
      * @brief Derived class for resistors
      * 
-     * Resistance represents a resistor component. 
+     * Resistance represents a resistor component.
      * Contains features related to resistors.
      */
     class Resistance : public Passive{

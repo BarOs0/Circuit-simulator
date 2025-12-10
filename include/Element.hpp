@@ -10,16 +10,17 @@ namespace bo{
     /**
      * @brief Base class for all elements in circuit theory
      * 
-     * Element represents electronic component:
+     * Element represents an electronic component:
      * - Resistor
      * - Capacitor
      * - Inductor
      * - Independent voltage source
-     * - Independent current 
+     * - Independent current source
      * 
-     * Contains information about type, value, nodes and ID
+     * Contains information about type, nodes and ID
      */
     class Element {
+
         public:
 
             /**
@@ -36,7 +37,7 @@ namespace bo{
 
             /**
              * @brief Returns nodes of the element
-             * @return Array filled with node numbers
+             * @return Array filled with node numbers {pnode, node}
              */
             std::array<unsigned int, 2> getEndpoints() const;
 
@@ -75,14 +76,13 @@ namespace bo{
              * @param pnode Positive node number
              * @param nnode Negative node number
              * @param type Element type
+             * @throw std::invalid_argument if pnode == nnode
              */
             Element(unsigned int pnode, unsigned int nnode, char type);
 
         private:
 
-            /**
-             * @brief Element counters for unique ID
-             */
+            /// Element counters for unique ID
             inline static unsigned int r_counter = 1; ///< Resistor counter
             inline static unsigned int c_counter = 1; ///< Capacitor counter
             inline static unsigned int l_counter = 1; ///< Inductor counter

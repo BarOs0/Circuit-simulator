@@ -15,7 +15,8 @@ namespace bo{
      * - Capacitance
      * - Inductance
      * 
-     * Contains information about passive element values
+     * Contains information about passive element values.
+     * Calulates complex admittance.
      */
     class Passive : public Element{
 
@@ -35,7 +36,7 @@ namespace bo{
             void setPassiveValue(double val);
 
             /**
-             * @brief Returns frequency-dependent admittance
+             * @brief Returns frequency-(in)dependent admittance
              * @param frequency Operating frequency [Hz]
              * @return Complex admittance for the given frequency
              */

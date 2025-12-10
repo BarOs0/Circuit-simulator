@@ -14,7 +14,7 @@ namespace bo{
     double Passive::validateVal(double val){
         if(val < E_LIM){
             throw std::invalid_argument("Value of the passive element must be positive! Invalid value: "
-                    + std::to_string(val)); //dolozyc wypisywanie ktory element to jest
+                    + std::to_string(val));
         }
         return val;
     }

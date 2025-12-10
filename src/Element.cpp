@@ -47,7 +47,7 @@ namespace bo{
         }
     }
 
-    bool Element::isNeighbour(const Element& other) const { // method overload
+    bool Element::isNeighbour(const Element& other) const {
         return (this->m_endpoints[0] == other.m_endpoints[0] && this->m_endpoints[0] != 0) ||
             (this->m_endpoints[1] == other.m_endpoints[1] && this->m_endpoints[1] != 0) ||
             (this->m_endpoints[0] == other.m_endpoints[1] && this->m_endpoints[0] != 0) ||

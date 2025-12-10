@@ -11,8 +11,9 @@ namespace bo{
      * - Independent voltage source
      * - Independent current source
      * 
-     * Contains information about active element values
+     * Contains information about active element values.
      */
+
     class Active : public Element{
 
         public:
@@ -24,8 +25,8 @@ namespace bo{
             std::complex<double> getActiveValue() const;
 
             /**
-             * @brief Sets new active element value [V/A]
-             * @param val New value
+             * @brief Sets new active element value (complx) [V/A]
+             * @param val New complex value
              */
             void setActiveValue(const std::complex<double> &val);
 

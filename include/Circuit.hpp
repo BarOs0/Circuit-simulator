@@ -17,7 +17,7 @@ namespace bo{
     /// Epsilon limit for frequency value validation
     constexpr double F_LIM = 1e-12;
 
-    /// Epsilon limit for Y matrix determinant (checks for floating nodes)
+    /// Epsilon limit for Y matrix determinant (checks for floating nodes and must VERY low)
     constexpr double Y_DET_LIM = 1e-18;
 
     /**
@@ -31,7 +31,7 @@ namespace bo{
         public:
 
             /**
-             * @brief Public constructor for circuit creation
+             * @brief Public constructor for circuit creation in main()
              * @param elements Vector of pointers to circuit elements
              * @param frequency Operating frequency [Hz]
              * @throw std::invalid_argument if frequency < F_LIM
@@ -39,7 +39,7 @@ namespace bo{
             Circuit(const std::vector<Element*> &elements, double frequency);
 
             /**
-             * @brief Returns current operating frequency
+             * @brief Returns operating frequency
              * @return Operating frequency [Hz]
              */
             double getFrequency() const;
@@ -69,7 +69,7 @@ namespace bo{
             std::vector<std::complex<double>> getPotentials() const;
 
              /**
-             * @brief Returns currents through voltage sources
+             * @brief Returns currents through voltage sources vector
              * @return Complex currents through voltage sources [A]
              */
             std::vector<std::complex<double>> getCurrents() const;
@@ -83,6 +83,11 @@ namespace bo{
              * @brief Displays voltage source currents in formatted output
              */
             void displayCurrents() const;
+
+             /**
+             * @brief Solves the MNA system Ax = z
+             */
+            void solve();
 
         private:
 
@@ -113,14 +118,19 @@ namespace bo{
 
             double m_frequency;  ///< Operating frequency [Hz]
 
+            inline static unsigned int c_counter = 1; ///< Circuit counter
+
+            unsigned int m_id; ///< Unique circuit ID
+
             /**
-             * @brief Builds circuit structure from element vector
+             * @brief Parse circuit components from element vector
+             *        Calculates number on nodes (maxiumum seeking)
              * @param elements Vector of circuit elements
              */
             void buildCircuit(const std::vector<Element*> &elements);
 
              /**
-             * @brief Generates system matrix A = [Y B; C D]
+             * @brief Generates system matrix A = [Y, B; C, D]
              */
             void generate_A();
 
@@ -148,11 +158,6 @@ namespace bo{
              * @brief Generates right-hand side vector z = [j; v]
              */
             void generate_z();
-
-             /**
-             * @brief Solves the MNA system Ax = z
-             */
-            void solve();
 
             /**
              * @brief Validates frequency value [Hz]

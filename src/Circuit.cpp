@@ -17,7 +17,8 @@ namespace bo{
         m_total_vsources = m_vsources.size();
         m_total_jsources = m_jsources.size();
 
-        solve();
+        m_id = c_counter++;
+
     }
 
     double Circuit::getFrequency() const {return m_frequency;}
@@ -32,23 +33,22 @@ namespace bo{
 
     std::vector<std::complex<double>> Circuit::getCurrents() const {return m_j;}
 
-    void Circuit::displayPotentials() const {
-        std::cout << "=========== POTENTIALS[V] ===========" << std::endl;
+    void Circuit::displayPotentials() const {    
+        std::cout << "[Circuit " << this->m_id << "]" << "___ POTENTIALS[V] __________" << std::endl;
         for(unsigned int i = 0; i < m_v.size(); i++){
             std::cout << "Node " << (i + 1) << " Potential: " << 
             std::to_string(m_v[i].real()) << ((m_v[i].imag()) > 0 ? "+" : "") << m_v[i].imag() << "i" << std::endl;
         }
-        std::cout << "=====================================" << std::endl;
     }
 
     void Circuit::displayCurrents() const {
         std::cout << std::endl;
-        std::cout << "============ CURRENTS[A] ============" << std::endl;
+        std::cout << "               CURRENTS[A]" << std::endl;
         for(unsigned int i = 0; i < m_j.size(); i++){
             std::cout << "V" << (i + 1) << " Current: " << 
             std::to_string(m_j[i].real()) << ((m_j[i].imag()) > 0 ? "+" : "") << m_j[i].imag() << "i" << std::endl;
         }
-        std::cout << "=====================================" << std::endl;
+        std::cout << "________________________________________" << std::endl;
     }
 
     void Circuit::buildCircuit(const std::vector<Element*> &elements){
@@ -57,13 +57,11 @@ namespace bo{
 
             for(auto e : elements){
 
-                //looking for total number of nodes
                 std::array<unsigned int, 2> nodes = e->getEndpoints();
             
                 nodes_max[0] = std::max(nodes_max[0], nodes[0]);
                 nodes_max[1] = std::max(nodes_max[1], nodes[1]);
 
-                //parsing
                 switch (e->whoAmI())
                 {
                 case 'R':
