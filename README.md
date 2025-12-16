@@ -1,6 +1,6 @@
-# CircuitSimulator
+# Circuit simulator
 
-Simple C++ circuit simulator: a static library `circuit_lib` and two example executables (`main`, `example`).
+Simple C++ circuit simulator: a static library `circuit_lib` and two executables (`main`, `example`).
 
 ## Requirements (Linux)
 - cmake >= 3.10
