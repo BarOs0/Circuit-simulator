@@ -33,22 +33,22 @@ namespace bo{
 
     std::vector<std::complex<double>> Circuit::getCurrents() const {return m_j;}
 
-    void Circuit::displayPotentials() const {    
+    void Circuit::displayPotentials() const {  
+        std::cout << std::endl;  
         std::cout << "[Circuit " << this->m_id << "]" << "___ POTENTIALS[V] __________" << std::endl;
         for(unsigned int i = 0; i < m_v.size(); i++){
             std::cout << "Node " << (i + 1) << " Potential: " << 
-            std::to_string(m_v[i].real()) << ((m_v[i].imag()) > 0 ? "+" : "") << m_v[i].imag() << "i" << std::endl;
+            std::to_string(m_v[i].real()) << ((m_v[i].imag()) >= 0 ? "+" : "") << m_v[i].imag() << "i" << std::endl;
         }
     }
 
     void Circuit::displayCurrents() const {
-        std::cout << std::endl;
-        std::cout << "               CURRENTS[A]" << std::endl;
+        std::cout << std::endl;  
+        std::cout << "[Circuit " << this->m_id << "]" << "___ CURRENTS[A] ____________" << std::endl;
         for(unsigned int i = 0; i < m_j.size(); i++){
             std::cout << "V" << (i + 1) << " Current: " << 
-            std::to_string(m_j[i].real()) << ((m_j[i].imag()) > 0 ? "+" : "") << m_j[i].imag() << "i" << std::endl;
+            std::to_string(m_j[i].real()) << ((m_j[i].imag()) >= 0 ? "+" : "") << m_j[i].imag() << "i" << std::endl;
         }
-        std::cout << "________________________________________" << std::endl;
     }
 
     void Circuit::buildCircuit(const std::vector<Element*> &elements){
