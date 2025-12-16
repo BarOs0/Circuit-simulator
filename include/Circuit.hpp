@@ -9,8 +9,8 @@
 #include "Resistance.hpp"
 #include "Capacitance.hpp"
 #include "Inductance.hpp"
-#include "IndependantV.hpp"
-#include "IndependantJ.hpp"
+#include "IndependentV.hpp"
+#include "IndependentJ.hpp"
 
 namespace bo{
 
@@ -95,8 +95,8 @@ namespace bo{
             std::vector<Capacitance*> m_capacitors;  ///< Vector of capacitor pointers
             std::vector<Inductance*> m_inductors;    ///< Vector of inductor pointers
 
-            std::vector<IndependantV*> m_vsources;   ///< Vector of voltage source pointers
-            std::vector<IndependantJ*> m_jsources;   ///< Vector of current source pointers
+            std::vector<IndependentV*> m_vsources;   ///< Vector of voltage source pointers
+            std::vector<IndependentJ*> m_jsources;   ///< Vector of current source pointers
 
             std::vector<Passive*> m_passives;        ///< Combined vector of passive elements
             std::vector<Active*> m_actives;          ///< Combined vector of active elements

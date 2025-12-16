@@ -74,10 +74,10 @@ namespace bo{
                     m_inductors.push_back(dynamic_cast<Inductance*>(e));
                     break;
                 case 'V':
-                    m_vsources.push_back(dynamic_cast<IndependantV*>(e));
+                    m_vsources.push_back(dynamic_cast<IndependentV*>(e));
                     break;
                 case 'J':
-                    m_jsources.push_back(dynamic_cast<IndependantJ*>(e));
+                    m_jsources.push_back(dynamic_cast<IndependentJ*>(e));
                     break;
                 default:
                     throw std::invalid_argument("Invalid component name: "

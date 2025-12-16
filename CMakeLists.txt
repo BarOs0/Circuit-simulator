@@ -27,8 +27,8 @@ set(SOURCES
     src/Resistance.cpp
     src/Capacitance.cpp
     src/Inductance.cpp
-    src/IndependantV.cpp
-    src/IndependantJ.cpp
+    src/IndependentV.cpp
+    src/IndependentJ.cpp
     src/Circuit.cpp
     src/main.cpp
 )

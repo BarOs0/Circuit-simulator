@@ -9,7 +9,7 @@ namespace bo{
      * 
      * IndependentV represents an independent voltage source component.
      */
-    class IndependantV : public Active{
+    class IndependentV : public Active{
 
         public:
 
@@ -19,7 +19,7 @@ namespace bo{
              * @param pnode Positive node number
              * @param nnode Negative node number
              */
-            IndependantV(std::complex<double> v, unsigned int pnode, unsigned int nnode);
+            IndependentV(std::complex<double> v, unsigned int pnode, unsigned int nnode);
     };
 
 }

@@ -9,7 +9,7 @@ namespace bo{
      * 
      * IndependentJ represents an independent current source component.
      */
-    class IndependantJ : public Active{
+    class IndependentJ : public Active{
 
         public:
 
@@ -19,7 +19,7 @@ namespace bo{
              * @param pnode Positive node number
              * @param nnode Negative node number
              */
-            IndependantJ(std::complex<double> j, unsigned int pnode, unsigned int nnode);
+            IndependentJ(std::complex<double> j, unsigned int pnode, unsigned int nnode);
     };
 
 }

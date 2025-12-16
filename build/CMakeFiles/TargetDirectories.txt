@@ -1,0 +1,3 @@
+/home/bartek/JPO2025/projekt/build/CMakeFiles/circuit_simulator.dir
+/home/bartek/JPO2025/projekt/build/CMakeFiles/edit_cache.dir
+/home/bartek/JPO2025/projekt/build/CMakeFiles/rebuild_cache.dir
