@@ -1,14 +1,14 @@
 #include "Resistance.hpp"
 #include "Capacitance.hpp"
-#include "Inductance.hpp"
+// #include "Inductance.hpp"
 #include "IndependentV.hpp"
-#include "IndependentJ.hpp"
+// #include "IndependentJ.hpp"
 #include "Circuit.hpp"
 
 int main(){
 
     bo::IndependentV Uwe(std::complex<double>(1,0), 1, 0);
-    bo::Resistance R1(1e-3, 1, 2);
+    bo::Resistance R1(1e3, 1, 2);
     bo::Capacitance C1(1e-6, 2, 0);
 
     std::cout << R1.getId() << std::endl;
@@ -34,6 +34,4 @@ int main(){
     c3.displayPotentials();
     c3.displayCurrents();
     std::cout << std::endl;
-
-    //sprawdzic poprawnosc wynikow przy wiekszych czestotliwosciach
 }

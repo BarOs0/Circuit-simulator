@@ -18,9 +18,8 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 # Solving Matrix equations with Eigen
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
-#Creating variable SOURCES
-#Everything in SOURCES will be compiled
-set(SOURCES
+#Creating variable LIB_SOURCES
+set(LIB_SOURCES
     src/Element.cpp
     src/Passive.cpp
     src/Active.cpp
@@ -30,30 +29,26 @@ set(SOURCES
     src/IndependentV.cpp
     src/IndependentJ.cpp
     src/Circuit.cpp
+)
+
+#Creating variable APP_SOURCES
+set(APP_SOURCES
     src/main.cpp
 )
 
-#Creating executable file "circuit_simulator"
-#Output location depends on where cmake is run (typically /build)
-add_executable(circuit_simulator ${SOURCES})
+#Creating my own library
+add_library(circuit_lib STATIC ${LIB_SOURCES})
+target_include_directories(circuit_lib PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
-# include <Eigen/Dense>
-target_link_libraries(circuit_simulator Eigen3::Eigen)
+#Linking Eigen to the library (exe will inherit)
+target_link_libraries(circuit_lib PUBLIC Eigen3::Eigen)
+
+#Creating executable file "circuit_simulator" and linkable library
+add_executable(circuit_simulator ${APP_SOURCES})
+target_link_libraries(circuit_simulator PRIVATE circuit_lib)
 
 #Compiler warnings
-#MSVC (Windows, Visual Studio)
-#GCC Linux
-#Clang macOS
-#-Wall -> all standard warnings
-#-Wextra -> additional warnings
-#-Wpedantic -> strict compliance with C++ standard
-if(MSVC)
-    #Windows Visual Studio (MSVC)
-    target_compile_options(circuit_simulator PRIVATE /W4)
-else()
-    # Linux (GCC) & macOS (Clang)
-    target_compile_options(circuit_simulator PRIVATE -Wall -Wextra -Wpedantic)
-endif()
+target_compile_options(circuit_simulator PRIVATE -Wall -Wextra -Wpedantic)
 
 #CMake is supposed to be launched in /build directory
 #Usage: mkdir build && cd build && cmake .. && make
