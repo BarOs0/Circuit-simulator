@@ -10,11 +10,6 @@ set(CMAKE_CXX_STANDARD 17)
 #If compiler does not support C++17 throw an error (no fallbacks)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# ${PROJECT_SOURCE_DIR} - main project directory
-# ${PROJECT_SOURCE_DIR}/include - .hpp files directory
-# This allows us to use #include "Element.hpp" instead of #include "../include/Element.hpp"
-include_directories(${PROJECT_SOURCE_DIR}/include)
-
 # Solving Matrix equations with Eigen
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
@@ -31,6 +26,10 @@ set(LIB_SOURCES
     src/Circuit.cpp
 )
 
+set(EXAMPLE_SOURCES
+    src/example.cpp
+)
+
 #Creating variable APP_SOURCES
 set(APP_SOURCES
     src/main.cpp
@@ -39,16 +38,12 @@ set(APP_SOURCES
 #Creating my own library
 add_library(circuit_lib STATIC ${LIB_SOURCES})
 target_include_directories(circuit_lib PUBLIC ${PROJECT_SOURCE_DIR}/include)
-
-#Linking Eigen to the library (exe will inherit)
 target_link_libraries(circuit_lib PUBLIC Eigen3::Eigen)
+target_compile_options(circuit_lib PUBLIC -Wall -Wextra -Wpedantic)
 
-#Creating executable file "circuit_simulator" and linkable library
-add_executable(circuit_simulator ${APP_SOURCES})
-target_link_libraries(circuit_simulator PRIVATE circuit_lib)
+# Creating executables and linking to the library
+add_executable(main ${APP_SOURCES})
+target_link_libraries(main PRIVATE circuit_lib)
 
-#Compiler warnings
-target_compile_options(circuit_simulator PRIVATE -Wall -Wextra -Wpedantic)
-
-#CMake is supposed to be launched in /build directory
-#Usage: mkdir build && cd build && cmake .. && make
+add_executable(example ${EXAMPLE_SOURCES})
+target_link_libraries(example PRIVATE circuit_lib)

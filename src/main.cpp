@@ -6,11 +6,13 @@
 #include "Circuit.hpp"
 
 int main(){
+
     /**
      * Here You can build your own topologies.
      * 
-     * If you do not know how to start see example.cpp
+     * If you do not know how to start see src/example.cpp
      * 
-     * See documentation for details
+     * See documentation for API details.
      */
+
 }
