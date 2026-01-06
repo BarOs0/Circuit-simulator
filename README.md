@@ -45,4 +45,5 @@ doxygen Doxyfile
 - build/ - out-of-source build directory (generated)
 - /src/example.cpp - sample file with user manual
 - /src/main.cpp - your playground, a file in which you can create your netlists
+- .vscode - minimal vscode configuration (linux, cpp 17, eigen3)
 
