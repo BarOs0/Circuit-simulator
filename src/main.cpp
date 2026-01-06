@@ -12,7 +12,6 @@ int main(){
      * 
      * If you do not know how to start see src/example.cpp
      * 
-     * See documentation for API details.
+     * Please generate and read doxygen documentation for API details.
      */
-
 }

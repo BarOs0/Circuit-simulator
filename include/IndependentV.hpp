@@ -15,7 +15,7 @@ namespace bo{
 
             /**
              * @brief Public constructor for user (main())
-             * @param v Voltage source value (complex) [V]
+             * @param v Voltage source EFFECTIVE value (complex) [V]
              * @param pnode Positive node number
              * @param nnode Negative node number
              */

@@ -13,12 +13,12 @@
 int main(){
 
     // Step 1: Create your netlist
-    bo::IndependentV Uwe(std::complex<double>(1,0), 1, 0);
+    bo::IndependentV Uwe(std::complex<double>(1,0), 1, 0); // sources must be initialized with an EFFECTIVE value
     bo::Resistance R1(500, 1, 2);
     bo::Resistance R2(500, 2, 3);
     bo::Capacitance C1(1e-6, 3, 0);
 
-    // (Optional) Calculate total value for series and parallel connections (not dependent on netlist)
+    // (Optional) Calculate total value for series and parallel connections (not dependent on netlist, use as calculator)
     std::cout << "R1 + R2 (series): " << (R1 + R2).getPassiveValue() << "Ω" << std::endl;
     std::cout << "R1 || R2 (parallel): " << (R1 || R2).getPassiveValue() << "Ω" << std::endl;
 
@@ -28,7 +28,7 @@ int main(){
     // R1 |= R2;
     // std::cout << "R1 |= R2 (parallel): " << R1.getPassiveValue() << "Ω" << std::endl;
     
-    // (Optional) You can get information about elements - see documentation for details
+    // (Optional) You can get information about elements - see doxygen documentation for details
     std::cout<< "R1 ID: " << R1.getId() << std::endl;
     std::cout<< "R1 nodes: " << R1.getEndpoints()[0] << ", " << R1.getEndpoints()[1] << std::endl;
     std::cout<< "R1 is connected to R2? " << (R1.isNeighbour(R2) ? "true" : "false" )<< std::endl;
@@ -41,7 +41,7 @@ int main(){
     std::cout<< "Uwe complex value: " << Uwe.getActiveValue().real() << 
     (Uwe.getActiveValue().imag() >= 0 ? "+" : "") << Uwe.getActiveValue().imag() << "i" << std::endl;
 
-    // (Optional) You can set different values for elements - see documentation for details
+    // (Optional) You can set different values for elements - see doxygen documentation for details
     // R1.setPassiveValue(3000);
     // R1.setEndpoints(2,3); // <- Be careful with floating nodes :)
     // R2.setEndpoints(1,2);
@@ -51,22 +51,22 @@ int main(){
     std::vector<bo::Element*> elements{&Uwe, &R1, &R2, &C1};
 
     // Step 3: Define circuit for fixed frequency [Hz]
-    bo::Circuit c1(elements, 10);
-    bo::Circuit c2(elements, 100);
-    bo::Circuit c3(elements, 1000);
+    bo::Circuit O1(elements, 10);
+    bo::Circuit O2(elements, 100);
+    bo::Circuit O3(elements, 1000);
 
     // Step 4: Solve the circuits
-    c1.solve();
-    c2.solve();
-    c3.solve();
+    O1.solve();
+    O2.solve();
+    O3.solve();
 
     // Step 5: Display results
-    c1.displayPotentials();
-    c1.displayCurrents();
+    O1.displayPotentials();
+    O1.displayCurrents();
 
-    c2.displayPotentials();
-    c2.displayCurrents();
+    O2.displayPotentials();
+    O2.displayCurrents();
 
-    c3.displayPotentials();
-    c3.displayCurrents();
+    O3.displayPotentials();
+    O3.displayCurrents();
 }

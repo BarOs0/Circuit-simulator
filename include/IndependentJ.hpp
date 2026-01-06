@@ -15,7 +15,7 @@ namespace bo{
 
             /**
              * @brief Public constructor for user (main())
-             * @param j Current source value (complex) [A]
+             * @param j Current source EFFECTIVE value (complex) [A]
              * @param pnode Positive node number
              * @param nnode Negative node number
              */
