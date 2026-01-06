@@ -32,8 +32,7 @@ From the `build` directory:
 ```
 
 ## Documentation
-For API detatils create a doxygen documentation
-From the project root:
+For API detatils create a doxygen documentation from the project root:
 ```sh
 doxygen -g
 doxygen Doxyfile
