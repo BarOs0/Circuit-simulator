@@ -1,0 +1,9 @@
+#IDE configuration file
+.vscode/
+
+#Executable files
+*.out
+*.exe
+
+#Build directiry
+build/
