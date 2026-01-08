@@ -46,4 +46,21 @@ doxygen Doxyfile
 - /src/example.cpp - sample file with user manual
 - /src/main.cpp - your playground, a file in which you can create your netlists
 - .vscode - minimal vscode configuration (linux, cpp 17, eigen3)
+- docs/ - directory with pdf documentation and UMLs
+
+## Usage
+- See example netlist code from the project root:
+```sh
+code /src/example.cpp
+```
+- Create your netlist from the project root:
+```sh
+code /src/main.cpp
+```
+- Compile and run your netlist
+```sh
+cd build
+make
+./main
+```
 
