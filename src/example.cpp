@@ -1,6 +1,16 @@
 /**
- * Example usage of the circuit-simulator library.
+ * Example usage of the Circuit-simulator library.
  * Defines a simple RC circuit and solves it for different frequencies.
+ * 
+ *    node 1   R1    node 2   R2    node 3
+ *       +---[    ]----+----[    ]---+
+ *       |                           |
+ * Uwe ( ^ )                       __|__ C1
+ *     ( | )                       _____
+ *       |                           |
+ *      =_= node 0                  =_= node 0
+ * 
+ * NOTE: Nodes should be numbered consecutively, starting with 1. Number 0 is reserved for the ground node.
  */
 
 #include "Resistance.hpp" // <- Include necessary modules

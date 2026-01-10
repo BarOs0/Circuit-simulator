@@ -24,7 +24,7 @@ namespace bo{
      * @brief Main class for circuit analysis
      * 
      * Circuit performs nodal analysis using Modified Nodal Analysis (MNA) method.
-     * Solves for node potentials and voltage sources branches currents in frequency domain.
+     * Solves for node potentials and voltage sources branches currents.
      */
     class Circuit{
 

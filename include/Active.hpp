@@ -25,7 +25,7 @@ namespace bo{
             std::complex<double> getActiveValue() const;
 
             /**
-             * @brief Sets new active element value (complx) [V/A]
+             * @brief Sets new active element value (complex) [V/A]
              * @param val New complex value
              */
             void setActiveValue(const std::complex<double> &val);

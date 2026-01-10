@@ -86,7 +86,7 @@ namespace bo{
                 }
             }
 
-            m_total_nodes = std::max(nodes_max[0], nodes_max[1]); // total number of nodes
+            m_total_nodes = std::max(nodes_max[0], nodes_max[1]);
     }
 
     void Circuit::generate_A(){
